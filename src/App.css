@@ -1,0 +1,57 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 380px;
+  text-align: center;
+  margin-block-end: 30px;
+  border: 1px solid rgb(123, 123, 123);
+  border-radius: 12px;
+  padding: 8% 6%;
+
+  input {
+    inline-size: 100%;
+    margin-block-start: 20px;
+  }
+
+  button {
+    margin-block-start: 20px;
+  }
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  text-align: center;
+  color: rgb(251, 133, 133);
+}
+
+.user-form {
+  width: 100%;
+  text-align: center;
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  label {
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.user{
+    text-align: center;
+
+    button{
+        margin-top: 30px;
+    }
+}

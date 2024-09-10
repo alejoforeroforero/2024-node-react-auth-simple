@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+}
+
+:root {
+  --background-color: #4c4c4c;
+  --nav-bg-color: #3b3b3b;
+  --text-color: #e1dede;
+  --title-color: #87cdf6;
+  --btn-bg-color: #329cfa;
+  --btn--color: #ffffff;
+  --link-color: #329cfa;
+  --input-bg-color: #454545;
+}
+
+[data-theme="dark"] {
+  --background-color: #4c4c4c;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+nav {
+  background-color: var(--nav-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  block-size: 60px;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  padding: 4%;
+}
+
+h1 {
+  color: var(--title-color);
+  font-size: 1.6rem;
+}
+
+h2 {
+  color: var(--title-color);
+  font-size: 1.4rem;
+}
+
+h3 {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+h4 {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+p {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+label {
+  color: var(--text-color);
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+a {
+  color: var(--link-color);
+  margin: 30px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  background-color: var(--btn-bg-color);
+  color: var(--btn--color);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(18, 57, 80);
+  }
+}
+
+input {
+  padding: 10px 14px;
+  background-color: var(--input-bg-color);
+  border: none;
+  border-radius: 12px;
+  color: var(--text-color);
+}
+
+textarea {
+  padding: 10px 14px;
+  background-color: var(--input-bg-color);
+  border: none;
+  border-radius: 12px;
+  color: var(--primary-text-color);
+}
