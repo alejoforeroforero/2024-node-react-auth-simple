@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
+  register,
   loginUser,
+  logout,
   updateUser,
   refreshToken,
   verifyRefreshTokenUser,
@@ -30,6 +32,23 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      /* register User */
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+        state.redirectTo = "/login";
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = String(action.payload.error);
+        alert(action.payload.error)
+      })
+
+      /* login User */
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -45,8 +64,25 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload.error;
       })
-      //Update User
 
+      /* logout User */
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isAuthenticated = false;
+        state.user = null
+        state.accessToken = null;
+        state.error = null;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.error;
+      })
+
+      /* Update User */
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -56,14 +92,14 @@ const authSlice = createSlice({
         state.user = action.payload.user;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        alert('error al actulizar el usuario, logeate de nuevo')
+        alert("error al actulizar el usuario, logeate de nuevo");
         state.isLoading = false;
         state.error = action.payload?.error || "Error al actualizar el usuario";
         state.accessToken = null;
         state.redirectTo = "/auth";
       })
 
-      //verifyRefreshTokenUser
+      /* verifyRefreshTokenUser */
       .addCase(verifyRefreshTokenUser.pending, (state) => {
         state.isLoading = true;
       })
@@ -78,6 +114,8 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
       })
+
+      //Este se debe reconstruir
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.accessToken = action.payload.accessToken;
       });

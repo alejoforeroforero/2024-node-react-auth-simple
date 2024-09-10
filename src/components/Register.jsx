@@ -1,38 +1,46 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "@/redux/states/authActions";
 
 const Register = () => {
-  //const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const error = useSelector((state) => state.auth.error);
+  const dispatch = useDispatch();
 
-  const handleEmailOnChange = (value) => {
-    //setUsername(value);
-    setEmail(value);
-  };
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e)
+    dispatch(register(credentials));
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => handleEmailOnChange(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <>
+      <div className="login">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            value={credentials.email}
+            onChange={(e) =>
+              setCredentials({ ...credentials, email: e.target.value })
+            }
+            placeholder="email"
+          />
+          <input
+            type="password"
+            value={credentials.password}
+            onChange={(e) =>
+              setCredentials({ ...credentials, password: e.target.value })
+            }
+            placeholder="Password"
+          />
+          <button type="submit">Register</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+      </div>
+    </>
   );
 };
 

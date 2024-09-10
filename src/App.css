@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   inline-size: 380px;
   text-align: center;
   margin-block-end: 30px;
@@ -10,12 +11,14 @@
   padding: 8% 6%;
 
   input {
+ 
     inline-size: 100%;
     margin-block-start: 20px;
   }
 
   button {
     margin-block-start: 20px;
+    margin-block-end: 10px;
   }
 }
 

@@ -7,19 +7,18 @@ const Login = () => {
   const error = useSelector((state) => state.auth.error);
   const token = useSelector((state) => state.auth.accessToken);
   const navigate = useNavigate();
-
-
-  useEffect(() => {
-    if (token) {
-      navigate("/"); 
-    }
-  }, [token, navigate]);
+  const dispatch = useDispatch();
 
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,9 +47,9 @@ const Login = () => {
           />
           <button type="submit">Login</button>
         </form>
-        
+
+        {error && <p className="error">{error}</p>}
       </div>
-      {error && <p className="error">{error}</p>}
     </>
   );
 };

@@ -1,8 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/redux/states/authActions";
+
 
 const UserInfo = () => {
   const authObj = useSelector((state) => state.auth);
-  console.log(authObj);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = ()=>{
+    dispatch(logout(null))
+  }
+
+
 
   return (
     <div className="user">
@@ -16,7 +25,7 @@ const UserInfo = () => {
         <p>{authObj.user?.phone_number}</p>
         <p>{authObj.user?.birth_date}</p>
       </div>
-      <button>Logout</button>
+      <button onClick={handleLogout} >Logout</button>
     </div>
   );
 };

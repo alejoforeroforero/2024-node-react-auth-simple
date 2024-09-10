@@ -1,20 +1,53 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "@/api/axios";
-import { login, refresh, verifyAuth, verifyRefreshToken } from "@/api/axios";
+import { refresh, verifyAuth, verifyRefreshToken } from "@/api/axios";
 
 import "react-toastify/dist/ReactToastify.css";
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async (credentials, { rejectWithValue }) => {
+export const register = createAsyncThunk(
+  "auth/register",
+  async (userData, { rejectWithValue }) => {
     try {
-      const response = await login(credentials);
+      const response = await axiosInstance.post("auth/register/", userData, {
+        withCredentials: true,
+      });
+
+      alert(response.data.message);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 );
+
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("auth/login/", userData, {
+        withCredentials: true,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (callback, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post("auth/logout/");
+      return response.data;
+      //callback(res);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// Revisar de aca para abajo
 
 export const refreshToken = createAsyncThunk(
   "auth/refresh",
@@ -52,36 +85,7 @@ export const verifyRefreshTokenUser = createAsyncThunk(
   }
 );
 
-export const register = createAsyncThunk(
-  "auth/register",
-  async (userData, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.post("auth/register/", userData, {
-        withCredentials: true,
-      });
-      if (!response.data.success) {
-        alert(response.data.message);
-        return;
-      }
-      alert(response.data.message);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (callback, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.post("auth/logout/");
-      callback(res);
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
 
 export const googleSignIn = createAsyncThunk(
   "auth/googleSignIn",

@@ -10,7 +10,8 @@ const axiosInstance = axios.create({
   withCredentials: true, // This is important for sending cookies with requests
 });
 
-export const login = (credentials) => axiosInstance.post("/auth/login", credentials);
+// export const login = (credentials) => axiosInstance.post("/auth/login", credentials);
+
 export const refresh = () => axiosInstance.post("/refresh");
 export const verifyAuth = () => axiosInstance.get('auth/verify-auth');
 export const verifyRefreshToken = () => axiosInstance.get('auth/refresh-token');
